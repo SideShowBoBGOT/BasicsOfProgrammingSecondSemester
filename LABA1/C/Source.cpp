@@ -80,7 +80,7 @@ void fill_file(char* file_name) {
     char buf[_MAX_PATH];
     cin.getline(buf, _MAX_PATH);
     string str = buf;
-    while (str!="end") {
+    while (str[0]!=5) {
         str += "\n";
         file << str.c_str();
         cin.getline(buf, _MAX_PATH);
