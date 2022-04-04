@@ -2,6 +2,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include<cmath>
 using namespace std;
 void create_list(void);
 void more_half(void);
@@ -32,7 +33,14 @@ void more_half() {
     vector<cl> cls;
     cl c;
     while (file.read((char*)&c, sizeof(cl))) {
-        if (c.end_serv - c.start_serv > 30) {
+        int h1 = int(c.start_serv / 100);
+        int h2 = int(c.end_serv / 100);
+        int m1 = int(c.start_serv % 100);
+        int m2 = int(c.end_serv % 100);
+        int h_delay = abs(h2 - h1);
+        int m_delay = abs(m2 - m1);
+        int delay = h_delay*60 + m_delay;
+        if (delay > 30) {
             cls.push_back(c);
         }
     }
@@ -66,7 +74,8 @@ void create_list() {
         cin.ignore();
 
         for (auto i = clients.cbegin(); i != clients.cend()&&is_ok; i++) {
-            if (c.start_serv >= i->start_serv && c.end_serv <= i->end_serv) {
+            if ((c.start_serv >= i->start_serv && c.start_serv <= i->end_serv)
+                ||(c.end_serv >= i->start_serv && c.end_serv <= i->end_serv)) {
                 is_ok = false;
                 cout << "Mismatch in time" << endl;;
             }
