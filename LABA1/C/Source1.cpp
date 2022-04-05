@@ -50,24 +50,42 @@ void fill_common() {
     file2.close();
     file3.close();
 }
-void fill_file(char* file_name) {
-    ofstream file(file_name, ios::out | ios::trunc);
-    char buf[_MAX_PATH];
-    cin.getline(buf, _MAX_PATH);
-    string str = buf;
-    while (str[0] != 5) {
-        str += "\n";
-        file << str.c_str();
+void fill_file(char* file_name, string a_or_w) {
+    if (a_or_w == "a") {
+        ofstream file(file_name, ios::out | ios::app);
+        char buf[_MAX_PATH];
         cin.getline(buf, _MAX_PATH);
-        str = buf;
+        string str = buf;
+        while (str[0] != 5) {
+            str += "\n";
+            file << str.c_str();
+            cin.getline(buf, _MAX_PATH);
+            str = buf;
+        }
+        file.close();
     }
-    file.close();
+    else {
+        ofstream file(file_name, ios::out | ios::trunc);
+        char buf[_MAX_PATH];
+        cin.getline(buf, _MAX_PATH);
+        string str = buf;
+        while (str[0] != 5) {
+            str += "\n";
+            file << str.c_str();
+            cin.getline(buf, _MAX_PATH);
+            str = buf;
+        }
+        file.close();
+    }
 }
-void create_files() {
-    ofstream file1("first.txt", ios::out | ios::trunc);
-    ofstream file2("second.txt", ios::out | ios::trunc);
+void create_files(string a_or_w) {
+    if (a_or_w =="w") {
+        ofstream file1("first.txt", ios::out | ios::trunc);
+        ofstream file2("second.txt", ios::out | ios::trunc);
+        file1.close();
+        file2.close();
+    }
     ofstream file3("third.txt", ios::out | ios::trunc);
-    file1.close();
-    file2.close();
+
     file3.close();
 }

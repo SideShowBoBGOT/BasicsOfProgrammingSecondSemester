@@ -1,9 +1,17 @@
 def create_file(name):
-    with open(name, 'w') as file:
-        s = input()
-        while ord(s[0]) != 5:
-            file.write(s + '\n')
+    a_or_w = input("Append or write?a\w: ")
+    if a_or_w == 'a':
+        with open(name, 'a') as file:
             s = input()
+            while ord(s[0]) != 5:
+                file.write(s + '\n')
+                s = input()
+    else:
+        with open(name, 'w') as file:
+            s = input()
+            while ord(s[0]) != 5:
+                file.write(s + '\n')
+                s = input()
 
 
 def fill_common(name1, name2, name3):
