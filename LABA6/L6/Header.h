@@ -1,18 +1,14 @@
+#pragma once
 #include <iostream>
 #include <list>
 #include<vector>
-#include"Header.h"
 using namespace std;
 template<typename T1, typename T2>
 class Tree {
 private:
     class TNode {
     public:
-        TNode() {
-            TNode* origin = nullptr;
-            TNode* left = nullptr;
-            TNode* right = nullptr;
-        }
+        TNode();
         T1 key;
         T2 value;
         TNode* origin;
@@ -20,27 +16,7 @@ private:
         TNode* right;
     };
     TNode* root = nullptr;
-    TNode* find_node(T1 key) {
-        bool found = false;
-        TNode* curr = this->root;
-        while (!found) {
-            if (key < curr->key) {
-                if (curr->left != nullptr) {
-                    curr = curr->left;
-                }
-                //exceprion
-            }
-            else if (key > curr->key) {
-                if (curr->right != nullptr) {
-                    curr = curr->right;
-                }
-                //exception
-            }
-            else if (key == curr->key) {
-                return curr;
-            }
-        }
-    }
+    TNode* find_node(T1 key)
     list<TNode*> roam(TNode* start) {
         list<TNode*> nodes;
         if (start->left != nullptr) {
@@ -138,7 +114,7 @@ public:
             nodeToDel->key = temp;
         }
         else if (nodeToDel->left == nullptr) {
-            if (nodeToDel->right == nullptr){
+            if (nodeToDel->right == nullptr) {
                 if (nodeToDel->origin->right == nodeToDel)
                     nodeToDel->origin->right = nullptr;
                 else if (nodeToDel->origin->left == nodeToDel)
@@ -154,7 +130,7 @@ public:
                 this->exclude(curr->key);
                 nodeToDel->key = temp;
             }
-        }            
+        }
     }
     list<pair<T1, T2>> to_list() {
         list<TNode*> nodes = this->roam(this->root);
@@ -163,7 +139,7 @@ public:
         kv.first = this->root->key;
         kv.second = this->root->value;
         pairs.push_back(kv);
-        for (auto i = nodes.begin() ; i != nodes.end() ; i++)
+        for (auto i = nodes.begin(); i != nodes.end(); i++)
         {
             kv.first = (*i)->key;
             kv.second = (*i)->value;
@@ -191,7 +167,7 @@ public:
             bool present = false;
             for (auto j = l1.begin(); j != l1.end(); j++)
             {
-                if (i->first==j->first)
+                if (i->first == j->first)
                 {
                     present = true;
                 }
@@ -272,7 +248,7 @@ void test2Exclude() {
         cout << i->first << "\t" << i->second << endl;
     }
 }
-void test3UniteTrees(){
+void test3UniteTrees() {
     Tree<int, string>t1 = Tree<int, string>();
     Tree<int, string>t2 = Tree<int, string>();
     Tree<int, string>t3 = Tree<int, string>();
@@ -317,13 +293,3 @@ void test3UniteTrees(){
         cout << i->first << "\t" << i->second << endl;
     }
 }
-int main()
-{
-    cout << "Test1 Build tree" << endl;
-    test1BuildTree();
-    cout << "Test2 Exclude 100 nad 96" << endl;
-    test2Exclude();
-    cout << "Test3" << endl;
-    test3UniteTrees();
-}
-
