@@ -88,10 +88,7 @@ bool TDate::operator ==(const TDate& d) const {
 }
 bool TDate::operator<(const TDate& d) const
 {
-    if ((!(*this > d) && !(*this == d))) {
-        return true;
-    }
-    return false;
+    return (!(*this > d) && !(*this == d));
 }
 bool TDate::operator>=(const TDate& d) const
 {
